@@ -2,9 +2,6 @@ package com.dataming;
 
 import com.dataming.pre_processing.DataProcess;
 import com.github.freva.asciitable.AsciiTable;
-import com.github.freva.asciitable.Column;
-import com.github.freva.asciitable.ColumnData;
-import com.github.freva.asciitable.HorizontalAlign;
 import weka.classifiers.Classifier;
 import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.functions.LinearRegression;
@@ -20,8 +17,6 @@ import weka.classifiers.trees.RandomTree;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -86,8 +81,6 @@ public class Main {
             eval.crossValidateModel(classifier, standardizedData, 10, new Random(1));
             long endTime = System.currentTimeMillis();
             long timeTaken = endTime - startTime;
-//            System.out.println("\nClassifier: " + classifier.getClass().getSimpleName());
-//            System.out.println("=====================================");
             results[0][index] = String.format("%.5f", eval.correlationCoefficient());
             results[1][index] = String.format("%.5f", eval.meanAbsoluteError());
             results[2][index] = String.format("%.5f", eval.rootMeanSquaredError());
@@ -106,6 +99,7 @@ public class Main {
         System.out.println(AsciiTable.getTable(header, results));
 
         System.out.println("=======================================================================");
+        assert bestClassifier != null;
         System.out.println("Best Classifier: " + bestClassifier.getClass().getSimpleName());
         System.out.println("Score: " + Score);
     }
